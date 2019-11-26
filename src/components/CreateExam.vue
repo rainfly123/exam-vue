@@ -6,7 +6,7 @@
   考试名称
   <el-input style="width:550px"
     placeholder="请输入考试名称"
-    v-model="input1">
+    v-model="title">
   </el-input>
   </div>
   <p>
@@ -45,8 +45,7 @@
           { type: 'info', icon:false,  label: '高二' },
           { type: 'success', icon:false,  label: '高三' },
         ],
-      input1: '',
-      input2: '' 
+      title: '',
       }
     },
   methods: {
@@ -57,6 +56,7 @@
           else
              this.flags.splice(this.flags.indexOf(tag.label), 1);
           console.log(this.flags);
+          console.log(this.title);
         }
     }
   }
