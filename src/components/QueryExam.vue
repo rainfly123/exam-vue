@@ -5,10 +5,12 @@
     style="width: 100%">
 
     <el-table-column
-      prop="id"
       label="序号"
       align="center"
       width="180">
+      <template slot-scope="scope">
+      <span>{{scope.$index}}</span>
+        </template>
     </el-table-column>
 
     <el-table-column
@@ -33,9 +35,12 @@
 
     <el-table-column
       prop="no"
-      label="编辑"
+      label="操作"
       align="center"
       width="180">
+      <template slot-scope="scope">
+    <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
     </el-table-column>
 
 
@@ -115,6 +120,11 @@
 
         ]
       }
+    },
+   methods: {
+          handleDelete(index, row) {
+            console.log(index, row.title);
+          }
     }
   }
 </script>
