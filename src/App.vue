@@ -2,21 +2,20 @@
   <div id="app">
     <img src="./assets/logo.png">
     <el-button @click="show = !show">Click Me</el-button>
-    <div style="display: flex; margin-top: 20px; height: 100px;">
-        <div v-show="show" class="transition-box">.el-fade-in-linear</div>
-        <div v-show="show" class="transition-box">.el-fade-in</div>
-        </div>
+    <CreateExam/>
   </div>
 </template>
 
 <script>
+import CreateExam from '@/components/CreateExam'
 export default {
   name: 'App',
   data: function(){
        return {
          show: true
        }
-  }
+  },
+  components: {CreateExam}
 }
 </script>
 
