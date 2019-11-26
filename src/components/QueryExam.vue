@@ -6,11 +6,9 @@
 
     <el-table-column
       label="序号"
+      prop="id"
       align="center"
       width="180">
-      <template slot-scope="scope">
-      <span>{{scope.$index}}</span>
-        </template>
     </el-table-column>
 
     <el-table-column
@@ -63,58 +61,58 @@
           no: '<a>i'
         }, {
           date: '2016-05-04',
-          id: '1',
+          id: '2',
           flags: '高三 初一',
           title: '初中英语二年级考试',
         }, {
           date: '2016-05-01',
-          id: '1',
+          id: '3',
           flags: '高三 初一',
           title: '初中英语二年级考试',
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '4',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '5',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '6',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '7',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '8',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '9',
           title: '初中英语二年级考试'
         },
        {
           date: '2016-05-03',
-          id: '1',
+          id: '10',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '11',
           title: '初中英语二年级考试'
         },
         {
           date: '2016-05-03',
-          id: '1',
+          id: '12',
           title: '初中英语二年级考试'
         },
 
@@ -124,6 +122,7 @@
    methods: {
           handleDelete(index, row) {
             console.log(index, row.title);
+            this.tableData.splice(this.tableData.indexOf(row), 1);
           }
     }
   }
