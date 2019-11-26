@@ -15,6 +15,9 @@
       prop="title"
       align="center"
       label="考试名称">
+      <template slot-scope="scope">
+      <el-input size="small" v-model="scope.row.title" placeholder="请输入内容" @change="handleEdit(scope.$index, scope.row)" v-if="showEdit[scope.$index]"></el-input> <span v-if="!showEdit[scope.$index]">{{scope.row.name}}</span>
+      </template>
     </el-table-column>
 
 
@@ -53,6 +56,7 @@
   export default {
     data() {
       return {
+        showEdit: [1,1,0,0], //显示编辑框
         tableData: [{
           id: '1',
           title: '初中英语二年级考试',
