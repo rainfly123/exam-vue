@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <el-button @click="show = !show">Click Me</el-button>
     <CreateExam/>
   </div>
 </template>
