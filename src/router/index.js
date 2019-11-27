@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import CreateExam from '@/components/CreateExam'
 import QueryExam from '@/components/QueryExam'
+import CreateItem from '@/components/CreateItem'
 
 Vue.use(Router)
 
@@ -24,7 +25,14 @@ export default new Router({
       path: '/createexam',
       name: 'CreateExam',
       component: CreateExam 
-   }
+   },
+   {
+      path: '/createitem',
+      name: 'CreateItem',
+      component:CreateItem
+    },
+
+
 
   ]
 })
