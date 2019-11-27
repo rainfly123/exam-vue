@@ -4,8 +4,8 @@
      <el-dialog
   title="添加考试步骤"
   :visible.sync="dialogVisible"
-  width="30%"
-  :before-close="handleClose">
+  width="35%"
+  >
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="步骤类型" prop="resource">
     <el-radio-group v-model="ruleForm.resource">
@@ -28,8 +28,10 @@
   <el-upload
   class="upload-demo"
   drag
+  limit="1"
   action="https://jsonplaceholder.typicode.com/posts/"
-  multiple>
+  :before-upload="beforeAvatarUpload"
+  headers="resourceid">
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传mp3/wmv/aac/opus文件，且不超过50MB</div>
@@ -99,14 +101,7 @@
       methods:{
         addDomain() {
           },
-     handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      },
-  submitForm(formName) {
+        submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
@@ -123,14 +118,14 @@
         this.imageUrl = URL.createObjectURL(file.raw);
       },
       beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isJPG = file.type.indexOf('audio') > - 1;
+        const isLt2M = file.size / 1024 / 1024 < 50;
 
         if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
+          this.$message.error('上传文件只能是 音频 格式!');
         }
         if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
+          this.$message.error('上传音频大小不能超过 50MB!');
         }
         return isJPG && isLt2M;
       }
@@ -140,28 +135,3 @@
    
 }
 </script>
-<style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
-</style>
