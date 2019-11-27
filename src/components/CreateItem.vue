@@ -15,7 +15,7 @@
     </el-radio-group>
   </el-form-item>
   <el-form-item label="输入指令" prop="command">
-    <el-input type="textarea" placeholder="下面收听一段录音，然后按下录音键开始录音" v-model="ruleForm.command"></el-input>
+    <el-input :disable="true" type="textarea" placeholder="下面收听一段录音，然后按下录音键开始录音" v-model="ruleForm.command"></el-input>
   </el-form-item>
   <el-form-item label="录音时长" prop="duration">
   <el-input type="number" placeholder="纯数字(单位秒)" v-model="ruleForm.duration"></el-input>
@@ -28,10 +28,10 @@
   <el-upload
   class="upload-demo"
   drag
-  limit="1"
+  :limit='1'
   action="https://jsonplaceholder.typicode.com/posts/"
   :before-upload="beforeAvatarUpload"
-  headers="resourceid">
+  >
   <i class="el-icon-upload"></i>
   <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
   <div class="el-upload__tip" slot="tip">只能上传mp3/wmv/aac/opus文件，且不超过50MB</div>
