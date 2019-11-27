@@ -109,12 +109,24 @@
           handleDelete(index, row) {
             console.log(index, row.title);
             this.tableData.splice(this.tableData.indexOf(row), 1);
+            this.$message({
+                message: '删除成功',
+                type: 'success',
+                center: 'true',
+                duration: 1000
+            });
           },
           enableEdit(index, row) {
             if (row.isSet) {
              //save data
              this.tableData[index] = row
              console.log(row)
+             this.$message({
+                message: '保存成功',
+                type: 'success',
+                center: 'true',
+                duration: 1000
+            });
             }
             row.isSet = !row.isSet;
 
