@@ -4,23 +4,23 @@
      <el-dialog
   title="添加考试步骤"
   :visible.sync="dialogVisible"
-  width="35%"
+  width="40%"
   >
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  <el-form-item label="步骤类型" prop="resource">
-    <el-radio-group v-model="ruleForm.resource">
-      <el-radio label="音频文件"></el-radio>
-      <el-radio label="TTS指令"></el-radio>
-      <el-radio label="耳机录音"></el-radio>
+  <el-form-item label="步骤类型" prop="type">
+    <el-radio-group v-model="ruleForm.type">
+      <el-radio label="audio">音频文件</el-radio>
+      <el-radio label="tts">TTS指令</el-radio>
+      <el-radio label="record">耳机录音</el-radio>
     </el-radio-group>
   </el-form-item>
-  <el-form-item label="输入指令" prop="desc">
-    <el-input type="textarea" v-model="ruleForm.command"></el-input>
+  <el-form-item label="输入指令" prop="command">
+    <el-input type="textarea" placeholder="下面收听一段录音，然后按下录音键开始录音" v-model="ruleForm.command"></el-input>
   </el-form-item>
-  <el-form-item label="录音时长" prop="desc">
-    <el-input type="text" v-model="ruleForm.duration"></el-input>
+  <el-form-item label="录音时长" prop="duration">
+  <el-input type="number" placeholder="纯数字(单位秒)" v-model="ruleForm.duration"></el-input>
   </el-form-item>
-  <el-form-item label="标准答案" prop="desc">
+  <el-form-item label="标准答案" prop="key">
     <el-input type="textarea" v-model="ruleForm.key"></el-input>
   </el-form-item>
 
@@ -72,27 +72,17 @@
           resource: '',
         },
         rules: {
-          name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
-          ],
-          date1: [
-            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-          ],
           type: [
-            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+            { required: true, message: '请设置类型', trigger: 'change' }
           ],
-          resource: [
-            { required: true, message: '请选择活动资源', trigger: 'change' }
+          duration: [
+            { max:3, required: true, message: '请设置录音时长', trigger: 'blur' }
           ],
-          desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          command: [
+            { required: true, message: '请填写语音指令', trigger: 'blur' }
+          ],
+          key: [
+            { required: true, message: '请填写标准答案', trigger: 'blur' }
           ]
         }
             
