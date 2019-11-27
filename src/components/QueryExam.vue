@@ -17,7 +17,7 @@
       label="考试名称"
       style="width: 20%;">
       <template slot-scope="scope">
-      <el-input size="small" v-model="scope.row.title" @change="handleEdit(scope.$index)" v-if="scope.row.isSet"></el-input> <span v-if="!scope.row.isSet">{{scope.row.title}}</span>
+      <el-input size="small" v-model="scope.row.title" v-if="scope.row.isSet"></el-input> <span v-if="!scope.row.isSet">{{scope.row.title}}</span>
       </template>
     </el-table-column>
 
@@ -29,7 +29,7 @@
       style="width: 20%;">
 
       <template slot-scope="scope">
-      <el-input size="small" v-model="scope.row.flags" @change="handleEdit(scope.$index)" v-if="scope.row.isSet"></el-input> <span v-if="!scope.row.isSet">{{scope.row.flags}}</span>
+      <el-input size="small" v-model="scope.row.flags" v-if="scope.row.isSet"></el-input> <span v-if="!scope.row.isSet">{{scope.row.flags}}</span>
       </template>
     </el-table-column>
 
@@ -111,8 +111,13 @@
             this.tableData.splice(this.tableData.indexOf(row), 1);
           },
           enableEdit(index, row) {
-            console.log(index)
+            if (row.isSet) {
+             //save data
+             this.tableData[index] = row
+             console.log(row)
+            }
             row.isSet = !row.isSet;
+
           }
 
     }
