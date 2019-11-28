@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import CreateExam from '@/components/CreateExam'
 import QueryExam from '@/components/QueryExam'
 import CreateItem from '@/components/CreateItem'
+import QueryItem from '@/components/QueryItem'
 
 Vue.use(Router)
 
@@ -31,8 +32,11 @@ export default new Router({
       name: 'CreateItem',
       component:CreateItem
     },
-
-
+   {
+      path: '/queryitem',
+      name: 'QueryItem',
+      component:QueryItem
+    },
 
   ]
 })
