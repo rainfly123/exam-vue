@@ -1,4 +1,6 @@
 <template>
+ <div>
+ <el-divider><span style="font-weight:bold;font-size:20px;">考试步骤</span></el-divider>
   <el-table
     :data="tableData"
     stripe
@@ -87,6 +89,11 @@
 
 
   </el-table>
+ <el-divider><span style="font-weight:bold;font-size:20px;">以上为全部考试步骤</span></el-divider>
+<router-link to="/createitem">
+<el-button type="primary">新增步骤</el-button>
+</router-link>
+  </div>
 </template>
 
 <script>

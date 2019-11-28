@@ -1,9 +1,9 @@
 <template>
 <div>
-      <el-button type="primary" @click="dialogVisible = true">新增一项</el-button>
      <el-dialog
   title="添加考试步骤"
   :visible.sync="dialogVisible"
+  :before-close="handleClose"
   width="40%"
   >
 <el-form :model="itemForm"  ref="itemForm" label-width="100px" class="demo-itemForm">
@@ -55,7 +55,7 @@
       data(){
           return{
             imageUrl: '',
-            dialogVisible : false,
+            dialogVisible : true,
             /*
             formData: {
             items: [
@@ -89,7 +89,8 @@
             
       },
       methods:{
-        addDomain() {
+             handleClose(done) {
+             this.$router.go(-1)
           },
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
