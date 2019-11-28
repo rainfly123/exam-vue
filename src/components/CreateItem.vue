@@ -6,25 +6,25 @@
   :visible.sync="dialogVisible"
   width="40%"
   >
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+<el-form :model="itemForm"  ref="itemForm" label-width="100px" class="demo-itemForm">
   <el-form-item label="步骤类型" prop="type">
-    <el-radio-group v-model="ruleForm.type">
+    <el-radio-group v-model="itemForm.type">
       <el-radio label="audio">音频文件</el-radio>
       <el-radio label="tts">TTS指令</el-radio>
       <el-radio label="record">耳机录音</el-radio>
     </el-radio-group>
   </el-form-item>
-  <el-form-item label="输入指令" prop="command">
-    <el-input :disable="true" type="textarea" placeholder="下面收听一段录音，然后按下录音键开始录音" v-model="ruleForm.command"></el-input>
+  <el-form-item v-if="itemForm.type==='tts'" label="输入指令" :rules="commandrule" prop="command">
+    <el-input type="textarea" placeholder="下面收听一段录音，然后按下录音键开始录音" v-model="itemForm.command"></el-input>
   </el-form-item>
-  <el-form-item label="录音时长" prop="duration">
-  <el-input type="number" placeholder="纯数字(单位秒)" v-model="ruleForm.duration"></el-input>
+  <el-form-item v-if="itemForm.type==='record'" :rules="recordrule" label="录音时长" prop="duration">
+  <el-input type="number" placeholder="纯数字(单位秒)" v-model="itemForm.duration"></el-input>
   </el-form-item>
-  <el-form-item label="标准答案" prop="key">
-    <el-input type="textarea" v-model="ruleForm.key"></el-input>
+  <el-form-item v-if="itemForm.type==='record'" :rules="recordrule" label="标准答案" prop="key">
+    <el-input type="textarea" v-model="itemForm.key"></el-input>
   </el-form-item>
 
-  <el-form-item label="音频文件">
+  <el-form-item v-if="itemForm.type==='audio'" label="音频文件">
   <el-upload
   class="upload-demo"
   drag
@@ -40,8 +40,8 @@
 
 
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
+    <el-button type="primary" @click="submitForm('itemForm')">立即创建</el-button>
+    <el-button @click="resetForm('itemForm')">重置</el-button>
   </el-form-item>
 
 </el-form>
@@ -56,6 +56,7 @@
           return{
             imageUrl: '',
             dialogVisible : false,
+            /*
             formData: {
             items: [
             {type: 'audio',url:'https://resource.qctchina.top/a7a3f305c3a7a85274959bf0d4419898.mp3'},
@@ -63,30 +64,30 @@
             {type: 'record', key:'hello', duration:60 , resource_id:13}
               ],
             },
-            ruleForm: {
-          command: '',
-          duration: 60,
-          key: '',
-          delivery: false,
-          type: [],
-          resource: '',
-        },
-        rules: {
-          type: [
-            { required: true, message: '请设置类型', trigger: 'change' }
-          ],
-          duration: [
-            { max:3, required: true, message: '请设置录音时长', trigger: 'blur' }
-          ],
-          command: [
-            { required: true, message: '请填写语音指令', trigger: 'blur' }
-          ],
-          key: [
-            { required: true, message: '请填写标准答案', trigger: 'blur' }
-          ]
-        }
-            
+            */
+            itemForm: {
+                command: '',
+                duration: 10,
+                key: '',
+                delivery: false,
+                type: '',
+                resource: '',
+              },
+           commandrule: {
+             command: [
+               { required: true, message: '请填写语音指令', trigger: 'blur' }
+             ]
+           },
+           recordrule: {
+             key: [
+               { required: true, message: '请填写标准答案', trigger: 'blur' }
+             ],
+             duration: [
+               { min:1, max:3, required: true, message: '请设置录音时长(1-180)秒', trigger: 'blur' }
+             ]
+           }
           }
+            
       },
       methods:{
         addDomain() {
@@ -119,7 +120,14 @@
         }
         return isJPG && isLt2M;
       }
-    }
+    },
+   watch: {
+      'itemForm.type': {
+          deep: true,
+          immediate: true,
+          handler(newtype, oldtype){console.log(newtype)}
+      }
+    } 
    
 
    
