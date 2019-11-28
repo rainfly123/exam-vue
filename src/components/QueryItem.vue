@@ -1,6 +1,7 @@
 <template>
  <div>
- <el-divider><span style="font-weight:bold;font-size:20px;">考试步骤</span></el-divider>
+  <h2>考试&nbsp;{{ $route.query.examid}}&nbsp;步骤</h2>
+ <el-divider></el-divider>
   <el-table
     :data="tableData"
     stripe
@@ -39,7 +40,7 @@
 
     <el-table-column
       prop="command"
-      label="提示指令"
+      label="语音提示"
       align="center"
       style="width: 20%;">
 
@@ -100,25 +101,27 @@
   export default {
     data() {
       return {
+        props:["examid"],
         tableData: [{
           id: '1',
           type: 'tts',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
-          duration: '10',
-          key: '',
+          duration: '无此字段',
+          key: '无此字段',
+          audiourl: '无此字段',
           isSet: false
         }, {
           id: '2',
           type: 'audio',
-          duration: '',
-          key: '',
-          audiourl: '',
+          duration: '无此字段',
+          command: '无此字段',
+          key: '无此字段',
           audiourl: "https://resource.qctchina.top/a.mp3",
           isSet: false
         }, {
           id: '3',
           type: 'record',
-          command: '',
+          command: '无此字段',
           duration: '30',
           key: "there is a cat , it's eating fish",
           audiourl: '',
@@ -127,9 +130,9 @@
         {
           id: '4',
           type: 'tts',
-          duration: '10',
+          duration: '无此字段',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
-          key: '',
+          key: '无此字段',
           audiourl: '',
           isSet: false
         },
@@ -180,7 +183,12 @@
             }
             row.isSet = !row.isSet;
 
-          }
+          },
+          getMsgFromSon(data){
+                console.log("receme son")
+                console.log(data)
+         }
+
 
     }
   }

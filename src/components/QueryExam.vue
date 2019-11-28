@@ -1,4 +1,7 @@
 <template>
+  <div>
+  <h2>考试列表</h2>
+ <el-divider></el-divider>
   <el-table
     :data="tableData"
     stripe
@@ -53,12 +56,9 @@
       </template>
     </el-table-column>
 
-
-
-
-
-
   </el-table>
+ <el-divider></el-divider>
+  </div>
 </template>
 
 <script>
@@ -130,7 +130,13 @@
             }
             row.isSet = !row.isSet;
 
+          },
+          handleQueryItems(index, row) {
+            this.$router.push({name:'QueryItem',query: {examid: row.id}});
+
           }
+
+
 
     }
   }

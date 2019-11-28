@@ -10,7 +10,7 @@
   <el-form-item label="步骤类型" prop="type">
     <el-radio-group v-model="itemForm.type">
       <el-radio label="audio">音频文件</el-radio>
-      <el-radio label="tts">TTS指令</el-radio>
+      <el-radio label="tts">语音提示</el-radio>
       <el-radio label="record">耳机录音</el-radio>
     </el-radio-group>
   </el-form-item>
@@ -96,6 +96,8 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             console.log(this.itemForm);
+            this.$emit('getMsgFromSon', this.itemForm)
+             this.$router.go(-1)
           } else {
             console.log('error submit!!');
             return false;
