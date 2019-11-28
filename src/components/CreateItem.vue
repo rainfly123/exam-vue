@@ -66,12 +66,11 @@
             },
             */
             itemForm: {
-                command: '',
-                duration: 10,
-                key: '',
-                delivery: false,
                 type: '',
-                resource: '',
+                command: '',
+                duration: '10',
+                key: '',
+                audiourl: 'https://resource.qctchina.top/a.mp3',
               },
            commandrule: {
              command: [
@@ -95,7 +94,7 @@
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            console.log(this.itemForm);
           } else {
             console.log('error submit!!');
             return false;
