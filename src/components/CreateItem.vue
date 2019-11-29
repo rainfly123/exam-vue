@@ -2,11 +2,11 @@
 <div>
      <el-dialog
   title="添加考试步骤"
-  :visible.sync="dialogVisible"
   :before-close="handleClose"
   width="40%"
+  :visible.sync="dialogVisible"
   >
-<el-form :model="itemForm"  ref="itemForm" label-width="100px" class="demo-itemForm">
+ <el-form :model="itemForm"  ref="itemForm" label-width="100px" class="demo-itemForm">
   <el-form-item label="步骤类型" prop="type">
     <el-radio-group v-model="itemForm.type">
       <el-radio label="audio">音频文件</el-radio>
@@ -52,25 +52,16 @@
 
 <script>
     export default {
+      props:['dialogVisible'],
       data(){
           return{
             imageUrl: '',
-            dialogVisible : true,
-            /*
-            formData: {
-            items: [
-            {type: 'audio',url:'https://resource.qctchina.top/a7a3f305c3a7a85274959bf0d4419898.mp3'},
-            {type:'tts',command:'你好',url:"https://resource.qctchina.top/a7a3f305c3a7a85274959bf0d4419898.mp3" },
-            {type: 'record', key:'hello', duration:60 , resource_id:13}
-              ],
-            },
-            */
             itemForm: {
                 type: '',
                 command: '',
-                duration: '10',
+                duration: '',
                 key: '',
-                audiourl: 'https://resource.qctchina.top/a.mp3',
+                audiourl: '',
               },
            commandrule: {
              command: [
@@ -95,8 +86,7 @@
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.itemForm);
-            this.$emit('getMsgFromSon', this.itemForm)
+             this.$emit('createItem', this.itemForm)
              this.$router.go(-1)
           } else {
             console.log('error submit!!');
@@ -128,9 +118,8 @@
           deep: true,
           immediate: true,
           handler(newtype, oldtype){console.log(newtype)}
-      }
-    } 
-   
+      },
+    },
 
    
 }

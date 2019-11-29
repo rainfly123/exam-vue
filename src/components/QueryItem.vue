@@ -92,15 +92,20 @@
   </el-table>
  <el-divider><span style="font-weight:bold;font-size:20px;">以上为全部考试步骤</span></el-divider>
 <router-link to="/createitem">
-<el-button type="primary">新增步骤</el-button>
+<el-button type="primary" @click="ShowDial=true">新增步骤</el-button>
 </router-link>
+<createitem v-bind:dialogVisible="ShowDial" v-on:createItem="getMsgFromSon"></createitem >
   </div>
 </template>
 
 <script>
+
+import CreateItem from '@/components/CreateItem'
   export default {
+    components: { 'createitem':CreateItem },
     data() {
       return {
+        ShowDial: false,
         props:["examid"],
         tableData: [{
           id: '1',
@@ -185,7 +190,6 @@
 
           },
           getMsgFromSon(data){
-                console.log("receme son")
                 console.log(data)
          }
 
