@@ -1,6 +1,7 @@
 <template>
  <div>
   <h2>考试&nbsp;{{ $route.query.examid}}&nbsp;步骤</h2>
+<el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowDial=true">新增步骤</el-button>
  <el-divider></el-divider>
   <el-table
     :data="tableData"
@@ -91,7 +92,6 @@
 
   </el-table>
  <el-divider><span style="font-weight:bold;font-size:20px;">以上为全部考试步骤</span></el-divider>
-<el-button type="primary" @click="ShowDial=true">新增步骤</el-button>
 <createitem v-bind:dialogVisible="ShowDial" :examid="examid" :itemid="itemid" v-on:createItem="getMsgFromSon"></createitem >
   </div>
 </template>
@@ -103,7 +103,6 @@ import CreateItem from '@/components/CreateItem'
     components: { 'createitem':CreateItem },
     data() {
       return {
-        examid: 1,
         ShowDial: false,
         tableData: [{
           id: 1,
@@ -203,7 +202,10 @@ import CreateItem from '@/components/CreateItem'
                return this.tableData[l - 1].id + 1
            else
                return 1
-       }
+       },
+     examid:function(){
+       return this.$route.query.examid
+     }
    }
   }
 </script>

@@ -117,7 +117,7 @@
       'itemForm.type': {
           deep: true,
           immediate: true,
-          handler(newtype, oldtype){console.log(newtype)}
+          handler(newtype, oldtype){console.log(newtype, this.examid, this.itemid)}
       },
     },
 

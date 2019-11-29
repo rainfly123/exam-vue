@@ -1,9 +1,9 @@
 <template>
   <div>
   <h2>考试列表</h2>
+ <el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowCreateExam=true">创建考试</el-button>
   <createxam v-if="ShowCreateExam" v-on:closeCreatexam="closeCreatexam">
   </createxam>
- <el-button type="primary" @click="ShowCreateExam=true">创建考试</el-button>
  <el-divider></el-divider>
   <el-table
     :data="tableData"
