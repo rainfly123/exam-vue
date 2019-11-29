@@ -1,17 +1,21 @@
 <template>
-<div class="tag-group">
-  <p><b> 添加考试</b></p> 
- <el-divider></el-divider>
-  <div>
+<div>
+     <el-dialog
+  title="添加考试"
+  :before-close="handleClose"
+  width="40%"
+  :visible="true"
+  >
+
   <i class="el-icon-document"></i>
   考试名称
-  <el-input style="width:550px"
+  <el-input style="width:83%"
     placeholder="请输入考试名称"
     v-model="title">
   </el-input>
-  </div>
-  <p>
-  <div>
+
+ </br>
+<div class="tag-group">
   <i class="el-icon-edit"></i>
   标签
   &nbsp;
@@ -20,15 +24,18 @@
     :key="item.label"
     :type="item.type"
     @click="choseFlag(item)"
-    effect="plain">
+    effect="dark">
     {{ item.label }}
     <i v-if="item.icon" class="el-icon-success"></i>
   </el-tag>
   </div>
- <el-divider></el-divider>
+ </br>
+  <div>
+  <el-button type="primary" icon="el-icon-check" @click="handleAdd">确定</el-button>
+  <el-button type="primary" icon="el-icon-close" @click="handleClose">取消</el-button>
+  </div>
 
-<el-button type="primary" icon="el-icon-check" @click="handleAdd">确定</el-button>
-<el-button type="primary" icon="el-icon-close" @click="$router.go(-1)">取消</el-button>
+     </el-dialog>
 </div>
 </template>
 
@@ -54,6 +61,9 @@
       }
     },
   methods: {
+      handleClose(done) {
+             this.$emit('closeCreatexam', this.title, this.flags)
+      },
       choseFlag(tag) {
           tag.icon = !tag.icon 
           if (tag.icon) 
@@ -64,7 +74,8 @@
           console.log(this.title);
         },
       handleAdd() {
-          console.log("add");
+             console.log("add");
+             this.$emit('closeCreatexam', this.title, this.flags)
         },
     }
   }

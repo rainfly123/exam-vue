@@ -1,6 +1,9 @@
 <template>
   <div>
   <h2>考试列表</h2>
+  <createxam v-if="ShowCreateExam" v-on:closeCreatexam="closeCreatexam">
+  </createxam>
+ <el-button type="primary" @click="ShowCreateExam=true">创建考试</el-button>
  <el-divider></el-divider>
   <el-table
     :data="tableData"
@@ -62,43 +65,46 @@
 </template>
 
 <script>
+  import CreateExam from '@/components/CreateExam'
   export default {
+    components: { 'createxam':CreateExam },
     data() {
       return {
+        ShowCreateExam:false,
         tableData: [{
-          id: '1',
+          id: 1,
           title: '初中英语二年级考试',
           flags: '高三 初一',
           date: '2016-05-02',
           isSet: false
         }, {
           date: '2016-05-04',
-          id: '2',
+          id: 2,
           flags: '高三 初一',
           title: '初中英语二年级考试',
           isSet: false
         }, {
           date: '2016-05-01',
-          id: '3',
+          id: 3,
           flags: '高三 初一',
           title: '初中英语二年级考试',
           isSet: false
         },
         {
           date: '2016-05-03',
-          id: '4',
+          id: 4,
           title: '初中英语二年级考试',
           isSet: false
         },
         {
           date: '2016-05-03',
-          id: '5',
+          id: 5,
           title: '初中英语二年级考试',
           isSet: false
         },
         {
           date: '2016-05-03',
-          id: '6',
+          id: 6,
           title: '初中英语二年级考试',
           isSet: false
         },
@@ -106,6 +112,31 @@
       }
     },
    methods: {
+          closeCreatexam(title, flags) { 
+                        this.ShowCreateExam = false
+                        console.log(title,flags)
+                        var formatDate = function () {  
+                                var date = new Date();
+				var y = date.getFullYear();  
+				var m = date.getMonth() + 1;  
+				m = m < 10 ? ('0' + m) : m;  
+				var d = date.getDate();  
+				d = d < 10 ? ('0' + d) : d;  
+				var h = date.getHours();  
+				var minute = date.getMinutes();  
+				minute = minute < 10 ? ('0' + minute) : minute; 
+				var second= date.getSeconds();  
+				second = minute < 10 ? ('0' + second) : second;  
+				return y + '-' + m + '-' + d+' '+h+':'+minute+':'+ second;  
+			}
+                        var l =  this.tableData.length
+                        var id = 1
+                        if (l > 0)
+                            id = this.tableData[l - 1].id + 1
+                        var one = {id:id, title:title, flags:flags.join(), isSet:false, date:formatDate()}
+                        this.tableData.push(one)
+                        console.log(formatDate())},
+
           handleDelete(index, row) {
             console.log(index, row.title);
             this.tableData.splice(this.tableData.indexOf(row), 1);
