@@ -52,7 +52,7 @@
 
 <script>
     export default {
-      props:['dialogVisible'],
+      props:['dialogVisible', 'examid', 'itemid'],
       data(){
           return{
             imageUrl: '',
@@ -86,8 +86,8 @@
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+             this.itemForm.id = this.itemid
              this.$emit('createItem', this.itemForm)
-             this.$router.go(-1)
           } else {
             console.log('error submit!!');
             return false;

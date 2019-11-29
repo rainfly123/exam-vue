@@ -92,7 +92,7 @@
   </el-table>
  <el-divider><span style="font-weight:bold;font-size:20px;">以上为全部考试步骤</span></el-divider>
 <el-button type="primary" @click="ShowDial=true">新增步骤</el-button>
-<createitem v-bind:dialogVisible="ShowDial" v-on:createItem="getMsgFromSon"></createitem >
+<createitem v-bind:dialogVisible="ShowDial" :examid="examid" :itemid="itemid" v-on:createItem="getMsgFromSon"></createitem >
   </div>
 </template>
 
@@ -103,10 +103,10 @@ import CreateItem from '@/components/CreateItem'
     components: { 'createitem':CreateItem },
     data() {
       return {
+        examid: 1,
         ShowDial: false,
-        props:["examid"],
         tableData: [{
-          id: '1',
+          id: 1,
           type: 'tts',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
           duration: '无此字段',
@@ -114,7 +114,7 @@ import CreateItem from '@/components/CreateItem'
           audiourl: '无此字段',
           isSet: false
         }, {
-          id: '2',
+          id: 2,
           type: 'audio',
           duration: '无此字段',
           command: '无此字段',
@@ -122,7 +122,7 @@ import CreateItem from '@/components/CreateItem'
           audiourl: "https://resource.qctchina.top/a.mp3",
           isSet: false
         }, {
-          id: '3',
+          id: 3,
           type: 'record',
           command: '无此字段',
           duration: '30',
@@ -131,7 +131,7 @@ import CreateItem from '@/components/CreateItem'
           isSet: false
         },
         {
-          id: '4',
+          id: 4,
           type: 'tts',
           duration: '无此字段',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
@@ -140,7 +140,7 @@ import CreateItem from '@/components/CreateItem'
           isSet: false
         },
         {
-          id: '5',
+          id: 5,
           type: 'audio',
           command: '',
           duration: '',
@@ -149,7 +149,7 @@ import CreateItem from '@/components/CreateItem'
           isSet: false
         },
         {
-          id: '6',
+          id: 6,
           type: 'record',
           command: '',
           duration: '10',
@@ -188,8 +188,21 @@ import CreateItem from '@/components/CreateItem'
 
           },
           getMsgFromSon(data){
+                console.log("receive msg")
                 console.log(data)
+                this.ShowDial = false
+                this.tableData.push(data)
          }
-    }
+    },
+   computed: {
+       itemid:function(){
+           var l = 0
+           l = this.tableData.length
+           if (l > 0)
+               return this.tableData[l - 1].id + 1
+           else
+               return 1
+       }
+   }
   }
 </script>
