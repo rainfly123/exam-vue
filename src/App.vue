@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import CreateExam from '@/components/CreateExam'
 export default {
   name: 'App',
   data: function(){
@@ -13,7 +12,6 @@ export default {
          show: true
        }
   },
-  components: {CreateExam}
 }
 </script>
 
