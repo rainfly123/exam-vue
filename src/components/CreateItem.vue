@@ -29,7 +29,8 @@
   class="upload-demo"
   drag
   :limit='1'
-  action="https://jsonplaceholder.typicode.com/posts/"
+  action="http://localhost:2019/upload"
+  :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload"
   >
   <i class="el-icon-upload"></i>
@@ -55,7 +56,6 @@
       props:['dialogVisible', 'examid', 'itemid'],
       data(){
           return{
-            imageUrl: '',
             itemForm: {
                 type: '',
                 command: '',
@@ -98,7 +98,7 @@
         this.$refs[formName].resetFields();
       },
       handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
+        this.itemForm.audiourl = file.response
       },
       beforeAvatarUpload(file) {
         const isJPG = file.type.indexOf('audio') > - 1;
