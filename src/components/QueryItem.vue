@@ -191,7 +191,8 @@ import CreateItem from '@/components/CreateItem'
                 console.log("receive msg")
                 console.log(data)
                 this.ShowDial = false
-                this.tableData.push(data)
+                var tmp = {...data}
+                this.tableData.push(tmp)
          }
     },
    computed: {
