@@ -43,22 +43,22 @@ import CreateItem from '@/components/CreateItem'
           id: 1,
           type: 'tts',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
-          duration: '无此字段',
-          key: '无此字段',
-          audiourl: '无此字段',
+          duration: '',
+          key: '',
+          audiourl: '',
           isSet: false
         }, {
           id: 2,
           type: 'audio',
-          duration: '无此字段',
-          command: '无此字段',
-          key: '无此字段',
+          duration: '',
+          command: '',
+          key: '',
           audiourl: "https://resource.qctchina.top/a.mp3",
           isSet: false
         }, {
           id: 3,
           type: 'record',
-          command: '无此字段',
+          command: '',
           duration: '30',
           key: "there is a cat , it's eating fish",
           audiourl: '',
@@ -67,9 +67,9 @@ import CreateItem from '@/components/CreateItem'
         {
           id: 4,
           type: 'tts',
-          duration: '无此字段',
+          duration: '',
           command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
-          key: '无此字段',
+          key: '',
           audiourl: '',
           isSet: false
         },
@@ -108,7 +108,7 @@ import CreateItem from '@/components/CreateItem'
           enableEdit(row) {
             if (row.isSet) {
              //save data
-             index = this.tableData.indexOf(row)
+             var index = this.tableData.indexOf(row)
              this.tableData[index] = row
              console.log(row)
              if (row.type != 'audio') {
