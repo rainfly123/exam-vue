@@ -9,8 +9,8 @@
 <el-card v-for="item in tableData" class="box-card" :key="item.id" shadow="hover">
   <div slot="header" class="clearfix">
     <span>步骤序号: {{item.id}}</span>
-    <el-button style="float: right; padding: 3px 0" :disabled="item.type == 'audio'" type="warning" round  icon="el-icon-edit"@click="enableEdit(item.id)">{{item.isSet ? '保存':"修改"}}</el-button>
-    <el-button style="float: right; padding: 3px 0" type="danger" round @click="handleDelete(item.id)">删除</el-button>
+    <el-button style="float: right; padding: 3px 0" :disabled="item.type == 'audio'" type="warning" round  icon="el-icon-edit"@click="enableEdit(item)">{{item.isSet ? '保存':"修改"}}</el-button>
+    <el-button style="float: right; padding: 3px 0" type="danger" round @click="handleDelete(item)">删除</el-button>
   </div>
   <div class="text item">
       步骤类型
@@ -95,8 +95,8 @@ import CreateItem from '@/components/CreateItem'
       }
     },
    methods: {
-          handleDelete(index, row) {
-            console.log(index, row.title);
+          handleDelete(row) {
+            console.log(row);
             this.tableData.splice(this.tableData.indexOf(row), 1);
             this.$message({
                 message: '删除成功',
@@ -105,9 +105,10 @@ import CreateItem from '@/components/CreateItem'
                 duration: 1000
             });
           },
-          enableEdit(index, row) {
+          enableEdit(row) {
             if (row.isSet) {
              //save data
+             index = this.tableData.indexOf(row)
              this.tableData[index] = row
              console.log(row)
              if (row.type != 'audio') {
