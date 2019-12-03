@@ -2,15 +2,15 @@
  <div>
 
   <h2>考试&nbsp;{{ $route.query.examid}}&nbsp;步骤</h2>
-  <el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowDial=true">新增步骤</el-button>
+  <el-button style="position: fixed;top:50px;left:50px;" icon="el-icon-plus" type="primary" @click="ShowDial=true">新增步骤</el-button>
   <br>
   <br/>
 
 <el-card v-for="item in tableData" class="box-card" :key="item.id" shadow="hover">
   <div slot="header" class="clearfix">
     <span>步骤序号: {{item.id}}</span>
-    <el-button style="float: right; padding: 5px 0; margin:0 3px;" :disabled="item.type == 'audio'" type="warning" icon="el-icon-edit"@click="enableEdit(item)">{{item.isSet ? '保存':"修改"}}</el-button>
-    <el-button style="float: right; padding: 5px 0" type="danger" icon="el-icon-close" @click="handleDelete(item)">删除</el-button>
+    <el-button style="float: right; padding: 5px ; margin: 3px;" :disabled="item.type == 'audio'" type="warning" icon="el-icon-edit"@click="enableEdit(item)">{{item.isSet ? '保存':"修改"}}</el-button>
+    <el-button style="float: right; padding: 5px;margin:3px;" type="danger" icon="el-icon-close" @click="handleDelete(item)">删除</el-button>
   </div>
   <div class="text item">
      <span v-if="item.type == 'audio'">音频文件</span>
@@ -22,7 +22,7 @@
   </div>
   <div class="text item">
       <el-input size="medium" v-model="item.command" v-if="item.isSet && item.type=='tts'"></el-input> 
-     <span style="display:inline-block;width:250px" v-if="!item.isSet">{{item.command}}</span>
+     <span style="display:inline-block;width:250px" v-if="!item.isSet && item.type=='tts'">{{item.command}}</span>
 
   </div>
   <div class="text item">
