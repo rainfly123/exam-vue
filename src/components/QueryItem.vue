@@ -1,10 +1,11 @@
 <template>
  <div>
-  <h2>考试&nbsp;{{ $route.query.examid}}&nbsp;步骤</h2>
-<el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowDial=true">新增步骤</el-button>
- <el-divider></el-divider>
 
-  
+  <h2>考试&nbsp;{{ $route.query.examid}}&nbsp;步骤</h2>
+  <el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowDial=true">新增步骤</el-button>
+  <br>
+  <br/>
+
 <el-card v-for="item in tableData" class="box-card" :key="item.id" shadow="hover">
   <div slot="header" class="clearfix">
     <span>步骤序号: {{item.id}}</span>
@@ -26,7 +27,6 @@
   </div>
 </el-card>
 
- <el-divider><span style="font-weight:bold;font-size:20px;">以上为全部考试步骤</span></el-divider>
 <createitem v-bind:dialogVisible="ShowDial" :examid="examid" :itemid="itemid" v-on:createItem="getMsgFromSon"></createitem >
   </div>
 </template>
@@ -163,6 +163,8 @@ import CreateItem from '@/components/CreateItem'
   }
 
   .box-card {
-    width: 480px;
+    width: 500px;
+    margin:0 auto;
+    margin-bottom: 20px;
   }
 </style>
