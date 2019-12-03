@@ -9,21 +9,27 @@
 <el-card v-for="item in tableData" class="box-card" :key="item.id" shadow="hover">
   <div slot="header" class="clearfix">
     <span>步骤序号: {{item.id}}</span>
-    <el-button style="float: right; padding: 3px 0" :disabled="item.type == 'audio'" type="warning" round  icon="el-icon-edit"@click="enableEdit(item)">{{item.isSet ? '保存':"修改"}}</el-button>
-    <el-button style="float: right; padding: 3px 0" type="danger" round @click="handleDelete(item)">删除</el-button>
+    <el-button style="float: right; padding: 5px 0; margin:0 3px;" :disabled="item.type == 'audio'" type="warning" icon="el-icon-edit"@click="enableEdit(item)">{{item.isSet ? '保存':"修改"}}</el-button>
+    <el-button style="float: right; padding: 5px 0" type="danger" icon="el-icon-close" @click="handleDelete(item)">删除</el-button>
   </div>
   <div class="text item">
-      步骤类型
      <span v-if="item.type == 'audio'">音频文件</span>
      <span v-if="item.type == 'tts'">语音指令</span>
      <span v-if="item.type == 'record'">设备录音</span>
   </div>
   <div class="text item">
      <a v-if="item.type == 'audio'" :href="item.audiourl"><el-button type="info">播放</el-button></a>
-      <el-input size="small" v-model="item.command" v-if="item.isSet && item.type=='tts'"></el-input> <span v-if="!item.isSet">{{item.command}}</span>
+  </div>
+  <div class="text item">
+      <el-input size="medium" v-model="item.command" v-if="item.isSet && item.type=='tts'"></el-input> 
+     <span style="display:inline-block;width:250px" v-if="!item.isSet">{{item.command}}</span>
 
-      <el-input size="small" v-model="item.duration" v-if="item.isSet && item.type=='record'""></el-input> <span v-if="!item.isSet">{{item.duration}}</span>
-      <el-input size="small" v-model="item.key" v-if="item.isSet && item.type=='record'"></el-input> <span v-if="!item.isSet">{{item.key}}</span>
+  </div>
+  <div class="text item">
+      <el-input size="medium" v-model="item.duration" v-if="item.isSet && item.type=='record'""></el-input> <span v-if="!item.isSet && item.type=='record'" >{{item.duration}} &nbsp秒</span>
+  </div>
+  <div class="text item">
+      <el-input size="medium" v-model="item.key" v-if="item.isSet && item.type=='record'"></el-input> <span v-if="!item.isSet && item.type=='record'">{{item.key}}</span>
   </div>
 </el-card>
 
