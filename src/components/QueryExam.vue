@@ -1,7 +1,7 @@
 <template>
   <div>
   <h2>考试列表</h2>
- <el-button style="float: left" icon="el-icon-plus" type="primary" @click="ShowCreateExam=true">创建考试</el-button>
+ <el-button style="position: fixed;top:50px;left:50px;" icon="el-icon-plus" type="primary" @click="ShowCreateExam=true">创建考试</el-button>
   <createxam v-if="ShowCreateExam" v-on:closeCreatexam="closeCreatexam">
   </createxam>
  <el-divider></el-divider>
