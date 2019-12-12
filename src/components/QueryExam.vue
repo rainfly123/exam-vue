@@ -101,45 +101,7 @@
         AreyousurePublish:false,
         ShowCreateExam:false,
         handling:0,
-        tableData: [{
-          examid: 1,
-          title: '初中英语二年级考试',
-          flags: '高三 初一',
-          date: '2016-05-02',
-          published: true,
-          isSet: false
-        }, {
-          date: '2016-05-04',
-          id: 2,
-          flags: '高三 初一',
-          title: '初中英语二年级考试',
-          published: false,
-          isSet: false
-        }, {
-          date: '2016-05-01',
-          id: 3,
-          flags: '高三 初一',
-          title: '初中英语二年级考试',
-          isSet: false
-        },
-        {
-          date: '2016-05-03',
-          id: 4,
-          title: '初中英语二年级考试',
-          isSet: false
-        },
-        {
-          date: '2016-05-03',
-          id: 5,
-          title: '初中英语二年级考试',
-          isSet: false
-        },
-        {
-          date: '2016-05-03',
-          id: 6,
-          title: '初中英语二年级考试',
-          isSet: false
-        },
+        tableData: [
         ]
       }
     },
@@ -225,6 +187,19 @@
 
 
 
-    }
+    },
+    created:function(){
+        let isurl = "https://yj.qctchina.top/api/qexam"
+        let o ={
+            userid:1
+        }
+        axios.post(isurl,Qs.stringify(o)).then(res=>{
+            console.log(res.data.data)
+            if (res.data.code ==  0){
+                this.tableData.length = 0
+                this.tableData = res.data.data
+            }
+         })
+   }
   }
 </script>
