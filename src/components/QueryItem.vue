@@ -16,6 +16,7 @@
      <span v-if="item.type == 'audio'">音频文件</span>
      <span v-if="item.type == 'tts'">语音指令</span>
      <span v-if="item.type == 'record'">设备录音</span>
+     <span v-if="item.type == 'wait'">计时等待</span>
   </div>
   <div class="text item">
      <a v-if="item.type == 'audio'" :href="item.audiourl"><el-button type="info">播放</el-button></a>
@@ -23,8 +24,19 @@
   <div class="text item">
       <el-input size="medium" v-model="item.command" v-if="item.isSet && item.type=='tts'"></el-input> 
      <span style="display:inline-block;width:250px" v-if="!item.isSet && item.type=='tts'">{{item.command}}</span>
-
   </div>
+
+
+  <div class="text item">
+
+      <el-radio-group v-model="item.radio" v-if="item.type=='wait'">
+        <el-radio :label="10">等待10秒</el-radio>
+        <el-radio :label="20">等待20秒</el-radio>
+        <el-radio :label="30">等待30秒</el-radio>
+        <el-radio :label="60">等待60秒</el-radio>
+      </el-radio-group>
+  </div>
+
   <div class="text item">
       <el-input size="medium" v-model="item.duration" v-if="item.isSet && item.type=='record'""></el-input> <span v-if="!item.isSet && item.type=='record'" >{{item.duration}} &nbsp秒</span>
   </div>
@@ -72,9 +84,9 @@ import CreateItem from '@/components/CreateItem'
         },
         {
           id: 4,
-          type: 'tts',
-          duration: '',
-          command: "下面请听一段音频，然后1分钟准备，按录音键开始录音，再次按录音键结束录音",
+          type: 'wait',
+          radio: 30,
+          command: "https://resource.qctchina.top/a.mp3",
           key: '',
           audiourl: '',
           isSet: false
